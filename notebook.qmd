@@ -1,0 +1,70 @@
+---
+title: "Multivariate Analysis - PCA and EFA"
+author: "Alexis Alberto Zuniga Alonso"
+date: today
+format:
+  html:
+    theme: flatly
+    toc: true
+    code-fold: show
+    code-tools: true
+    embed-resources: true
+    fig-width: 8
+  typst:
+    toc: true
+    fig-width: 7
+execute:
+  warning: true
+  message: true
+  echo: true
+---
+
+# 1. Introduction
+Analyse the variables below from the dataset 'Holzinger-Swineford 1939' with multivariate methods such as Principal Component Analysis (PCA for short) and Exploratory Factor Analysis (EFA).
+
+1. Visual (x1)
+2. Cubos (x2)
+3. Índice de Lozenges (x3)
+4. Compresión de párrafos (x4)
+5. Completar oraciones (x5)
+6. Significado de palabras (x6)
+7. Velocidad para sumar (x7)
+8. Velocidad para contar puntos (x8)
+9. Discriminación aceleradad de mayúsculas rectas y curvas (x9)
+
+## 1.1. Project Libraries and Installation
+
+```{r}
+libs <- c("lavaan", "psych", "GPArotation", "FactoMineR",
+  "factoextra", "corrplot", "skimr", "tidyverse")
+
+to_install <- setdiff(libs, rownames(installed.packages()))
+if (length(to_install)) install.packages(to_install)
+
+invisible(lapply(libs, library, character.only = TRUE))
+```
+
+Then, we import the library `lavaan` where the dataset already is.
+
+```{r}
+library(lavaan)
+
+data <- HolzingerSwineford1939
+```
+
+
+We first glimpse at the data with `glimpse(data)` and `skim(data)`
+
+```{r}
+glimpse(data)
+skim(data)
+```
+
+---
+
+We also display a correlation matrix using the function `corrplot(cor(df), method = "number")` that shows how correlated our variables `x1` to `x9` are.
+```{r}
+df <- data |> select(x1:x9)
+corrplot(cor(df), method = "number")
+```
+
