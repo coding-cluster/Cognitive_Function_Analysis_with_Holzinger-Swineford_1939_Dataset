@@ -35,6 +35,8 @@ Analyse the variables below from the dataset 'Holzinger-Swineford 1939' with mul
 ## 1.1. Project Libraries and Installation
 
 ```{r}
+#| message: false
+#| warning: false
 libs <- c("lavaan", "psych", "GPArotation", "FactoMineR",
   "factoextra", "corrplot", "skimr", "tidyverse")
 
@@ -92,10 +94,10 @@ KMO = 0.75 and Bartlett's test is significant (χ² = 904.1, df = 36, p < 0.001)
 
 ## 2.3. Running the PCA
 
-Variables are standardised (`scale.unit = TRUE`) so each test weighs equally.
+Variables are standardised (`scale.unit = TRUE`) so each test weighs equally. We keep all 9 components (`ncp`) so the scree plots show the full spectrum.
 
 ```{r}
-pca <- PCA(df, scale.unit = TRUE, graph = FALSE)
+pca <- PCA(df, scale.unit = TRUE, ncp = ncol(df), graph = FALSE)
 ```
 
 ## 2.4. Number of components (c)

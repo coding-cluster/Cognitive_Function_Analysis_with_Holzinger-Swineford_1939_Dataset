@@ -36,8 +36,8 @@ corrplot(cor(df), method = "number")
 KMO(df)
 cortest.bartlett(cor(df), n = nrow(df))
 
-# PCA on standardised variables
-pca <- PCA(df, scale.unit = TRUE, graph = FALSE)
+# PCA on standardised variables, keeping all 9 components
+pca <- PCA(df, scale.unit = TRUE, ncp = ncol(df), graph = FALSE)
 
 
 # 4. Number of components (c) --------------------------------------------------
